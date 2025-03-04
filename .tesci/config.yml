@@ -9,7 +9,34 @@ download:
 
 data:
   src: openalex-fac-tech-sci-2023-2025.csv
-  dest: aggregated.csv
+  dest: openalex-fac-tech-sci-aggregations.csv
+
+aggregate:
+  - alias: count_publications_by_year
+    columns:
+      - id
+      - publication_year
+    function: count
+    grouped: publication_year
+
+  - alias: sum_citations_by_year
+    columns:
+      - cited_by_count
+    function: sum
+    grouped: publication_year
+
+  - alias: sum_apc_by_year
+    columns:
+      - apc_paid.value_usd
+    function: sum
+    grouped: publication_year
+
+  - alias: top10_percent_publications_by_year
+    columns:
+      - citation_normalized_percentile.is_in_top_10_percent
+    function: sum
+    grouped: publication_year
+
 
 release:
   - url: https://github.com/n-dusan/fac-tech-sci-demo
