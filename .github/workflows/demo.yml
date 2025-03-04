@@ -1,4 +1,9 @@
-on: [push]
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 0 * * *'
 
 env:
   TESCI_RUN_FROM_CI: True
