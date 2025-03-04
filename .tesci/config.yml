@@ -1,5 +1,5 @@
 description: >
-  "Download works from OpenAlex for the Faculty of Technical Sciences, University of Novi Sad, 2023-2025"
+  "Download and release aggregated works from OpenAlex for the Faculty of Technical Sciences, University of Novi Sad, 2023-2025"
 
 download:
   provider: "openalex"
@@ -37,6 +37,29 @@ aggregate:
     function: sum
     grouped: publication_year
 
+  # - alias: count_oa_vs_closed
+  #   columns:
+  #     - id
+  #   function: count
+  #   grouped:
+  #     - open_access.is_oa
+  #     - publication_year
+
+  # - alias: count_top10_percent_by_oa_and_year
+  #   columns:
+  #     - citation_normalized_percentile.is_in_top_10_percent
+  #   function: sum
+  #   grouped:
+  #     - publication_year
+  #     - open_access.is_oa
+
+  # - alias: avg_citations_by_oa_and_year
+  #   columns:
+  #     - cited_by_count
+  #   function: avg
+  #   grouped:
+  #     - publication_year
+  #     - open_access.is_oa
 
 release:
   - url: https://github.com/n-dusan/fac-tech-sci-demo
