@@ -1,8 +1,9 @@
 on: [push]
 
 env:
-  EXPORTER_RUN_FROM_CI: True
-  EXPORTER_RELEASE_STRATEGY: "${{ startsWith(github.ref, 'refs/tags/') && 'tag' || 'commit' }}"
+  TESCI_RUN_FROM_CI: True
+  TESCI_RELEASE_STRATEGY: "${{ startsWith(github.ref, 'refs/tags/') && 'tag' || 'commit' }}"
+  GITHUB_TOKEN: ${{ secrets.RELEASE_API_TOKEN }}
 
 jobs:
   run-tesci:
@@ -38,3 +39,15 @@ jobs:
       - name: Verify tesci works
         run: |
           tesci --help
+
+      - name: Download works from API
+        run: |
+          tesci download
+
+      - name: Apply aggregations
+        run: |
+          tesci apply
+
+      - name: Release
+        run: |
+          tesci release
